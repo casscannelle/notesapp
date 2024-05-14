@@ -1,5 +1,7 @@
 .card {
     transition: translate ease-in-out 100ms, box-shadow ease-in-out 100ms;
+    background-color: rgb(250, 250, 144);
+    border: none;
 }
 
 .card:hover,
