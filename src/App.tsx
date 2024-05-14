@@ -2,9 +2,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useMemo } from "react";
 import { Container } from 'react-bootstrap';
-import NewNote from './components/NewNote';
 import { useLocalStorage } from './useLocalStorage';
 import { v4 as uuidV4 } from 'uuid'
+
+//Componentes
+import { NoteList } from './components/NoteList';
+import NewNote from './components/NewNote';
+import { NoteLayout } from './components/NoteLayout';
+
+
 
 export type Note ={
   id: string
@@ -56,14 +62,14 @@ function App() {
    return (
     <Container className='my-4'>
       <Routes>
-        <Route path='/' element={<h1>Home</h1>} />
+        <Route path='/' element={<NoteList notes={notesWithTags} availableTags={tags}/>} />
         <Route path='/new' element={
         <NewNote 
         onSubmit={onCreateNote} 
         onAddTag={addTag}
         availableTags={tags}/>} />
-        
-        <Route path='/:id'>
+
+        <Route path='/:id' element={<NoteLayout notes={notesWithTags} />}>
           <Route index element={<h1>Show</h1>} />
           <Route path='edit' element={<h1>Edit</h1>} />
         </Route> 
