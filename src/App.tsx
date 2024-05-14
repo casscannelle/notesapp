@@ -10,6 +10,7 @@ import { NoteList } from './components/NoteList';
 import NewNote from './components/NewNote';
 import { NoteLayout } from './components/NoteLayout';
 import { Note } from './components/Note';
+import EditNote from './components/EditNote';
 
 
 
@@ -56,6 +57,18 @@ function App() {
       ]
     })
   }
+
+  function onUpdateNote(id: string, {tags, ...data}: NoteData) {
+    setNotes(prevNotes => {
+      return prevNotes.map(note => {
+        if (note.id === id) {
+          return {...note, ...data, id: uuidV4(), tagIds: tags.map(tag => tag.id)}
+        } else {
+          return note
+        }
+      })
+    })
+  }
   
   function addTag(tag:Tag) {
     setTags(prev => [...prev, tag]) 
@@ -72,7 +85,10 @@ function App() {
 
         <Route path='/:id' element={<NoteLayout notes={notesWithTags} />}>
           <Route index element={<Note />} />
-          <Route path='edit' element={<h1>Editar</h1>} />
+          <Route path='edit' element={<EditNote 
+          onSubmit={onUpdateNote} 
+          onAddTag={addTag}
+          availableTags={tags}/>} />
         </Route> 
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
