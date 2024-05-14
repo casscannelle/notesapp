@@ -31,13 +31,13 @@ export function NoteList ({availableTags, notes}: NoteListProps) {
     return (
         <>
         <Row className="align-items-center mb-4">
-            <Col><h1>Notes</h1></Col>
+            <Col><h1>Minhas notas</h1></Col>
             <Col xs='auto'>
                 <Stack gap={2} direction='horizontal'>
                     <Link to='/new'>
-                        <Button variant='primary'>Create</Button>
+                        <Button variant='primary'>Nova Nota</Button>
                     </Link>
-                        <Button variant='secondary'>Edit Tags</Button>
+                        <Button variant='secondary'>Editar Tags</Button>
                 </Stack>
             </Col>
         </Row>
@@ -53,6 +53,7 @@ export function NoteList ({availableTags, notes}: NoteListProps) {
                 <Form.Group controlId='tags'>
                     <Form.Label>Filtrar por tags</Form.Label>
                     <ReactSelect
+                    placeholder='Selecionar'
                     value={selectedTags.map(tag =>{
                          return {label: tag.label, value: tag.id }
                          })} 

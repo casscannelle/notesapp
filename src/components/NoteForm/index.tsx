@@ -36,7 +36,7 @@ type NoteFormProps = {
             <Row>
                 <Col>
                 <Form.Group controlId='title'>
-                    <Form.Label>Title</Form.Label>
+                    <Form.Label>Título</Form.Label>
                     <Form.Control ref={titleRef} required />
                 </Form.Group>
                 </Col>
@@ -44,6 +44,7 @@ type NoteFormProps = {
                 <Form.Group controlId='tags'>
                     <Form.Label>Tags</Form.Label>
                     <CreatableReactSelect
+                    placeholder='Adicionar Tag'
                     onCreateOption={label => {
                         const newTag = {id: uuidV4(), label}
                         onAddTag(newTag)
@@ -65,12 +66,12 @@ type NoteFormProps = {
                 </Col>
             </Row>
             <Form.Group controlId='markdown'>
-                <Form.Label>Body</Form.Label>
+                <Form.Label>Nota</Form.Label>
                 <Form.Control ref={markdownRef} required as='textarea' rows={12} />
             </Form.Group>
             <Stack direction='horizontal' gap={2} className='justify-content-end'>
-                <Button type='submit' variant='outline-primary'>Save</Button>
-                <Link to='..'><Button type='button' variant='outline-secondary'>Cancel</Button></Link>
+                <Button type='submit' variant='outline-primary'>Salvar</Button>
+                <Link to='..'><Button type='button' variant='outline-secondary'>Cancelar</Button></Link>
             </Stack>
         </Stack>
 
