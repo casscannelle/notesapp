@@ -8,6 +8,7 @@ import styles from './NoteList.module.css'
 type SimplifiedNote ={
     tags: Tag[]
     title: string
+    markdown: string
     id: string
 }
 
@@ -85,7 +86,7 @@ export function NoteList ({availableTags, notes, onUpdateTag, onDeleteTag}: Note
         <Row xs={1} sm={2} lg={3} xl={4} className='g-3'>
            {FilteredNotes.map(note => (
             <Col key={note.id}>
-                <NoteCard id={note.id} title={note.title} tags={note.tags}/>
+                <NoteCard id={note.id} title={note.title} markdown={note.markdown} tags={note.tags}/>
             </Col>
            ))}
         </Row>
@@ -93,12 +94,13 @@ export function NoteList ({availableTags, notes, onUpdateTag, onDeleteTag}: Note
         </>
     )
 }
-function NoteCard({id, title, tags}: SimplifiedNote) {
+function NoteCard({id, title, markdown, tags}: SimplifiedNote) {
     return(
         <Card as={Link} to={`/${id}`} className={`h-100 text-reset text-decoration-none ${styles.card}`}>
             <Card.Body>
                 <Stack gap={2} className='align-items-center justfy-content-center h-100'>
                     <span className='fs-5'>{title}</span>
+                    <span>{markdown.substring(0, 100)}...</span>
                     {tags.length > 0 && (
                        <Stack gap={1} direction='horizontal' className='justify-content-center flex-wrap'>
                         {tags.map(tag => (
