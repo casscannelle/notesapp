@@ -1,6 +1,6 @@
-import { Navigate, Outlet, useOutletContext, useParams } from "react-router-dom"
+import { Navigate, useOutletContext, useParams } from "react-router-dom"
 import { Note } from "../../App"
-import { Modal, ModalBody } from "react-bootstrap"
+import { NoteModal } from "../NoteModal"
 
 type NoteLayoutProps ={
     notes: Note[]
@@ -12,13 +12,8 @@ export function NoteLayout({notes}: NoteLayoutProps) {
 
     if (note == null) return <Navigate to='/' replace />
 
-    return (
-        <Modal show={true} size="lg" centered>
-            <ModalBody>
-                <Outlet context={note}/>
-            </ModalBody>
-        </Modal>
-    )
+    return <NoteModal note={note} onClose={() => {}} />
+
 }
 
 export function useNote() {
