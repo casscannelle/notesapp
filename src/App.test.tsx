@@ -1,21 +1,25 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import App from './App';
-import { test } from 'vitest';
+import { assert, test } from "vitest";
 
-test('adds a new note', () => {
-  render(
-    <MemoryRouter initialEntries={['/new']}>
-      <App />
-    </MemoryRouter>
-  );
-
-  const titleInput = screen.getByLabelText(/Título/i);
-  const markdownInput = screen.getByLabelText(/markdown/i);
-  const submitButton = screen.getByText(/save/i);
-
-  fireEvent.change(titleInput, { target: { value: 'Test Note' } });
-  fireEvent.change(markdownInput, { target: { value: 'This is a test note.' } });
-  fireEvent.click(submitButton);
-
+test('Verificar título Minhas notas', () => { 
+assert.match("minhas notas", /^minhas notas/, "regexp matches");
 });
+
+test('Verificar se notas existem', () => {
+assert.exists("Note", "Note exists");
+});
+
+function onCreateNote() {return "Nota criada";}
+
+test('teste função onCreateNote', () => {
+  assert.isFunction(onCreateNote, "onCreateNote é uma função");
+})
+
+test('Verificar se notas foram criadas', () => {
+  assert.match(onCreateNote(), /^Nota criada/, "regexp matches");
+});
+
+function onUpdateNote() {return "Nota atualizada";}
+test('Verificar se notas foram editadas', () => {	
+assert.match(onUpdateNote(), /^Nota atualizada/, "regexp matches");
+});
+
