@@ -1,6 +1,6 @@
-/* eslint-disable react-refresh/only-export-components */
 import { Navigate, Outlet, useOutletContext, useParams } from "react-router-dom"
 import { Note } from "../../App"
+import { Modal, ModalBody } from "react-bootstrap"
 
 type NoteLayoutProps ={
     notes: Note[]
@@ -12,8 +12,13 @@ export function NoteLayout({notes}: NoteLayoutProps) {
 
     if (note == null) return <Navigate to='/' replace />
 
-    return <Outlet context={note}/>
-
+    return (
+        <Modal show={true} size="lg" centered>
+            <ModalBody>
+                <Outlet context={note}/>
+            </ModalBody>
+        </Modal>
+    )
 }
 
 export function useNote() {
